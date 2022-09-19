@@ -1,11 +1,18 @@
-all:  build run
+all:  run
 
-run:
-	bin/main
+run-server:
+	bin/server
 
-build:
-	go build cmd/main.go -o bin/main
+run-client:
+	bin/client
 
+build: build-server build-client
+
+build-server:
+	go build -o bin/server cmd/server/main.go
+
+build-client:
+	go build -o bin/client cmd/client/main.go
 
 lint:
 	golangci-lint run ./...
